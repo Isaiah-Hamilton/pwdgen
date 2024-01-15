@@ -9,13 +9,35 @@ fn main() {
     let mut rng = rand::thread_rng();
 
     let mut password = String::new();
+    let pool = 0;
 
     let mut i = 1;
     while i < 32 {
-    let random_number = rng.gen_range(0..=LOWERCASE_CHARS.len());
-        password += LOWERCASE_CHARS[random_number];
+        if pool == 0 {
+            println!("Please provide a char type");
+            break;
+        }
+        let random_pool = rng.gen_range(1..=pool);
+        if random_pool == 1 {
+            let random_number = rng.gen_range(0..=LOWERCASE_CHARS.len() - 1);
+            password += LOWERCASE_CHARS[random_number];
+        }
+        if random_pool == 2 {
+            let random_number = rng.gen_range(0..=UPPERCASE_CHARS.len() - 1);
+            password += UPPERCASE_CHARS[random_number];
+        }
+        if random_pool == 3 {
+            let random_number = rng.gen_range(0..=NUMERIC_CHARS.len() - 1);
+            password += NUMERIC_CHARS[random_number];
+        }
+        if random_pool == 4 {
+            let random_number = rng.gen_range(0..=SPECIAL_CHARS.len() - 1);
+            password += SPECIAL_CHARS[random_number];
+        }
         i += 1;
     }
 
-    println!("password: {}", password);
+    if !password.is_empty() {
+        println!("password: {}", password);
+    }
 }
