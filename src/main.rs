@@ -13,6 +13,22 @@ struct Args {
     /// Length of the password
     #[arg(short, long, default_value_t = 16)]
     length: u8,
+
+    /// Add lowercase letters to the password [default: true]
+    #[arg(long, default_value_t = true)]
+    lowercase: bool,
+
+    /// Add uppercase letters to the password [default: true]
+    #[arg(long, default_value_t = true)]
+    uppercase: bool,
+
+    /// Add special characters to the password [default: false]
+    #[arg(long, default_value_t = false)]
+    special: bool,
+
+    /// Add numbers to the password [default: true]
+    #[arg(long, default_value_t = true)]
+    numbers: bool
 }
 
 fn main() {
@@ -20,8 +36,24 @@ fn main() {
     let mut rng = rand::thread_rng();
 
     let mut password = String::new();
-    let char_sets = [LOWERCASE_CHARS, UPPERCASE_CHARS, NUMERIC_CHARS, SPECIAL_CHARS];
-    
+    let mut char_sets = Vec::new();
+
+    if args.lowercase {
+        char_sets.push(LOWERCASE_CHARS);
+    }
+
+    if args.uppercase {
+        char_sets.push(UPPERCASE_CHARS);
+    }
+
+    if args.numbers {
+        char_sets.push(NUMERIC_CHARS);
+    }
+
+    if args.special {
+        char_sets.push(SPECIAL_CHARS);
+    }
+
     for _ in 0..args.length {
         let random_pool = rng.gen_range(0..char_sets.len());
         let char_set = &char_sets[random_pool];
