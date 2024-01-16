@@ -22,8 +22,8 @@ struct Args {
     #[arg(long, default_value_t = true)]
     uppercase: bool,
 
-    /// Add special characters to the password [default: false]
-    #[arg(long, default_value_t = false)]
+    /// Add special characters to the password [default: true]
+    #[arg(long, default_value_t = true)]
     special: bool,
 
     /// Add numbers to the password [default: true]
