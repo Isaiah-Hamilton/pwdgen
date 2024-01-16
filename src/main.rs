@@ -11,7 +11,7 @@ const SPECIAL_CHARS: [&str; 27] = ["!", "@", "#", "$", "%", "^", "&", "*", "(", 
 #[command(author, version, about, long_about = None)]
 struct Args {
     /// Length of the password
-    #[arg(short, long, default_value_t = 32)]
+    #[arg(short, long, default_value_t = 16)]
     length: u8,
 }
 
